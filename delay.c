@@ -33,15 +33,17 @@ along with Stellarap.  If not, see <http://www.gnu.org/licenses/>.
 #include "delay.h"
 
 unsigned char delay_stat = DELAY_IDLE;
-unsigned long delay_count = 0; 
+unsigned long delay_count = 0;
+uint32_t countConst = 50000;
+
 void delay_isr()
 {
   ROM_TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
   
-  if (delay_count > 50000)
+  if (delay_count > countConst)
   {
-    delay_count -= 50000; 
-    ROM_TimerLoadSet(TIMER1_BASE, TIMER_A, 50000*80000);
+    delay_count -= countConst; 
+    ROM_TimerLoadSet(TIMER1_BASE, TIMER_A, countConst*80000);
     ROM_TimerEnable(TIMER1_BASE, TIMER_A);
   } else if (delay_count > 0)
   {
@@ -59,9 +61,9 @@ void delay_isr()
 void delay(unsigned int milli)
 {
   delay_count = milli;
-  if (delay_count > 50000) 
+  if (delay_count > countConst) 
   {
-    milli = 50000;
+    milli = countConst;
     delay_count -= milli; 
   } else
   {

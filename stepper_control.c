@@ -169,7 +169,6 @@ void  Timer0A_ISR(void)
   unsigned long timer;
   int i;
   unsigned char all_steps_completed; 
-  float tmp; 
   unsigned char endstop_bits;
   unsigned char endstops[4];
 

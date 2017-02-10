@@ -26,4 +26,5 @@ along with Stellarap.  If not, see <http://www.gnu.org/licenses/>.
 extern float cur_temp[2];
 extern float setpoint[2];
 extern float error_i[2];
+void heaters_init();
 #endif

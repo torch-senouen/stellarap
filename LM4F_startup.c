@@ -306,7 +306,7 @@ void hardfault_handler( unsigned int * hardfault_args ){
 
 
   // Just loop forever, so if you want to debug the processor it's running.
- unsigned int stacked_r0;
+  unsigned int stacked_r0;
   unsigned int stacked_r1;
   unsigned int stacked_r2;
   unsigned int stacked_r3;

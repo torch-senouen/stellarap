@@ -44,7 +44,7 @@ CPU=-mcpu=cortex-m4
 FPU=-mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 
 # Stellarisware path
-STELLARISWARE_PATH=~/stellarisware/
+STELLARISWARE_PATH=~/StellarisLaunchPad3DPrinter/stellarisware/
 
 # Program name definition for ARM GNU C compiler.
 CC      = ${PREFIX_ARM}-gcc
@@ -56,7 +56,7 @@ CP      = ${PREFIX_ARM}-objcopy
 OD      = ${PREFIX_ARM}-objdump
 
 # Option arguments for C compiler.
-CFLAGS=-mthumb ${CPU} ${FPU}  -ffunction-sections -fdata-sections  -MD -std=c99 -Wall -pedantic -c -g 
+CFLAGS=-mthumb ${CPU} ${FPU} -ffunction-sections -fdata-sections -MD -std=c99 -Wall -pedantic -c -g 
 # Library stuff passed as flags!
 CFLAGS+= -I ${STELLARISWARE_PATH} -DPART_$(PART) -DTARGET_IS_BLIZZARD_RA1
 
@@ -73,10 +73,10 @@ ODFLAGS = -S
 # I can get them from the gcc frontend, using some options.
 # See gcc documentation
 LIB_GCC_PATH=${shell ${CC} ${CFLAGS} -print-libgcc-file-name}
-#LIBC_PATH=${shell ${CC} ${CFLAGS} -print-file-name=libc.a}
-#LIBM_PATH=${shell ${CC} ${CFLAGS} -print-file-name=libm.a}
-LIBC_PATH=~/newlib-2.0.0/arm-none-eabi/thumb/newlib/libc.a 
-LIBM_PATH=~/newlib-2.0.0/arm-none-eabi/thumb/newlib/libm.a 
+LIBC_PATH=${shell ${CC} ${CFLAGS} -print-file-name=libc.a}
+LIBM_PATH=${shell ${CC} ${CFLAGS} -print-file-name=libm.a}
+#LIBC_PATH=~/newlib-2.0.0/arm-none-eabi/thumb/newlib/libc.a 
+#LIBM_PATH=~/newlib-2.0.0/arm-none-eabi/thumb/newlib/libm.a 
 # Uploader tool path.
 # Set a relative or absolute path to the upload tool program.
 # I used this project: https://github.com/utzig/lm4tools

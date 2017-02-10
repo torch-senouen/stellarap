@@ -21,6 +21,7 @@ along with Stellarap.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -103,7 +104,7 @@ void endstops_isr()
       if (cur_block->dir[i]<0 && cur_block->steps[i] > 0 && endstops[i] ) 
         abort=1;
   
-    if (endstop_bits & STOP_PIN == 0 || abort)
+    if ((endstop_bits & STOP_PIN) == 0 || abort)
     {
       puts("Endstop Triggered. Aborting Current Blocks\r\n");
       cur_block->status = BLOCK_ABORTED;

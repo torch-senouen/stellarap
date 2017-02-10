@@ -35,9 +35,24 @@ SECTIONS {
     . = ALIGN(4);
       _etext = .;
       _sidata = _etext;
-  } > FLASH
+  } >FLASH
 
-  .data : AT ( _sidata )
+  .ARM.extab :
+  {
+    *(.ARM.extab* .gnu.linkonce.armextab.*)
+  } >FLASH
+
+  .ARM.exidx :
+  {
+    __exidx_start = .;
+       *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+    __exidx_end = .;
+  } >FLASH
+
+  _data_start_flash = ALIGN(8);
+
+/*  .data : AT ( _sidata ) */
+  .data : AT ( _data_start_flash )
   {
     . = ALIGN(4);
           _sdata = . ;
